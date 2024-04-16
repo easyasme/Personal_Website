@@ -2,59 +2,35 @@ const { WebSocketServer } = require('ws');
 const uuid = require('uuid');
 
 function peerProxy(httpServer) {
-  // Create a websocket object
   const wss = new WebSocketServer({ noServer: true });
 
-  // Handle the protocol upgrade from HTTP to WebSocket
   httpServer.on('upgrade', (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, function done(ws) {
-      wss.emit('connection', ws, request);
-    });
+    if (request.headers['sec-websocket-protocol'] === 'chat') {
+      wss.handleUpgrade(request, socket, head, ws => {
+        wss.emit('connection', ws, request);
+      });
+    } else {
+      // Handle other WebSocket upgrades here
+    }
   });
 
-  // Keep track of all the connections so we can forward messages
-  let connections = [];
-
   wss.on('connection', (ws) => {
-    const connection = { id: uuid.v4(), alive: true, ws: ws };
-    connections.push(connection);
+    console.log('New WebSocket connection for chat');
 
-    // Forward messages to everyone except the sender
-    ws.on('message', function message(data) {
-      connections.forEach((c) => {
-        if (c.id !== connection.id) {
-          c.ws.send(data);
+    ws.on('message', data => {
+      // Broadcast the received message to all connected clients
+      const message = JSON.parse(data);
+      wss.clients.forEach(client => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify({ name: message.name, message: message.message }));
         }
       });
     });
 
-    // Remove the closed connection so we don't try to forward anymore
-    ws.on('close', () => {
-      const pos = connections.findIndex((o, i) => o.id === connection.id);
-
-      if (pos >= 0) {
-        connections.splice(pos, 1);
-      }
-    });
-
-    // Respond to pong messages by marking the connection alive
-    ws.on('pong', () => {
-      connection.alive = true;
-    });
+    ws.on('close', () => console.log('WebSocket connection closed'));
   });
 
-  // Keep active connections alive
-  setInterval(() => {
-    connections.forEach((c) => {
-      // Kill any connection that didn't respond to the ping last time
-      if (!c.alive) {
-        c.ws.terminate();
-      } else {
-        c.alive = false;
-        c.ws.ping();
-      }
-    });
-  }, 10000);
+  return wss;
 }
 
 module.exports = { peerProxy };

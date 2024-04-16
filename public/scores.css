@@ -1,6 +1,45 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #222;
+}
+
+thead {
+  background-color: #444;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #555;
+  text-align: left;
+  color: #fff;
+}
+
 td {
   max-width: 40vw;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+tr:nth-child(odd) {
+  background-color: #333;
+}
+
+tr:hover {
+  background-color: #555 !important;
+}
+
+.table-striped-columns td:nth-child(odd) {
+  background-color: #111;
+}
+
+.table-striped-columns tr:hover td {
+  background-color: #555;
 }
