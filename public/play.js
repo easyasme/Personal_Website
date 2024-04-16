@@ -59,7 +59,7 @@ class MathPuzzleSolver {
           this.score++;
           alert('Correct answer!');
       } else {
-          alert('Wrong answer, try again!');
+          alert('Wrong answer!');
       }
       this.updateScore(this.score);
       this.loadNextPuzzle();
@@ -79,18 +79,25 @@ class MathPuzzleSolver {
   }
 
   startTimer() {
-      this.timeLimit = 60; // reset timer to 60 seconds
-      this.timer = setInterval(() => {
-          if (this.timeLimit > 0) {
-              console.log(`Time remaining: ${this.timeLimit} seconds`);
-              this.timeLimit--;
-          } else {
-              clearInterval(this.timer);
-              alert('Time is up! Game over.');
-              this.resetGame();
-          }
-      }, 1000);
-  }
+    this.timeLimit = 60; // reset timer to 60 seconds
+    const timerElement = document.getElementById('timer');
+
+    const updateTimer = () => {
+        if (this.timeLimit > 0) {
+            const minutes = Math.floor(this.timeLimit / 60);
+            const seconds = this.timeLimit % 60;
+            timerElement.textContent = `Time left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            this.timeLimit--;
+        } else {
+            clearInterval(this.timer);
+            alert('Time is up! Game over.');
+            this.resetGame();
+        }
+    };
+
+    updateTimer();
+    this.timer = setInterval(updateTimer, 1000);
+}
 
   updateScore(score) {
       const scoreDisplay = document.getElementById('score');
