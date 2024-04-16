@@ -1,0 +1,103 @@
+/* Overall body and theme settings */
+body.theme-dark {
+  background-color: #282c34; /* Dark gray background */
+  color: #c7c7c7; /* Light gray text */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styling */
+header.container-fluid {
+  background-color: #333745; /* Slightly lighter gray for the header */
+  color: #ffffff;
+  padding: 10px 20px;
+}
+
+nav.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.brand-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 30px; /* Space between brand link and navigation menu */
+}
+
+.navigation-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item {
+  margin-right: 20px;
+}
+
+.link-active {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+/* Main content */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.input-group {
+  justify-content: center;
+}
+
+.form-input {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.btn-primary-action, .btn-secondary-action {
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-secondary-action {
+  background-color: #6c757d;
+}
+
+footer.footer-container {
+  background-color: #333745;
+  color: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-reset {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.link-source {
+  color: #4CAF50;
+  text-decoration: none;
+}

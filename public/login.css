@@ -1,0 +1,14 @@
+#playerName {
+  color: rgb(140, 200, 255);
+  font-size: 1.5em;
+  margin: 0.5em;
+}
+
+.input-group.field-margin {
+  margin-bottom: 10px;
+}
+
+.btn-action {
+  color: white;
+  background-color: #007bff; /* Bootstrap primary color */
+}

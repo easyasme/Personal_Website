@@ -1,0 +1,27 @@
+{
+  "name": "MATH_PUZZLE_WEBSITE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easyasme/Personal_Website"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/easyasme/Personal_Website"
+  },
+  "homepage": "https://github.com/easyasme/Personal_Website",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.12.0"
+  }
+}
